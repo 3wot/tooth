@@ -14,17 +14,17 @@ import router from './router'
 
 Vue.use(MintUI)
 
-Vue.prototype.userInfo = {
-	name:'夏天',
-	uid:"xiatian",
-  phone:'',
-  set(data) {
-    this.name = data.name;
-    this.phone = data.phone;
-    this.uid = data.dep_id;
-    this.id = data.id;
-  }
-}
+// Vue.prototype.userInfo = {
+// 	name:'夏天',
+// 	uid:"xiatian",
+//   phone:'',
+//   set(data) {
+//     this.name = data.name;
+//     this.phone = data.phone;
+//     this.uid = data.dep_id;
+//     this.id = data.id;
+//   }
+// }
 
 Vue.config.productionTip = false
 
@@ -34,9 +34,4 @@ new Vue({
   router,
   components: { App },
   template: '<App/>',
-  data:{
-  	user:{
-  		name:'jjw'
-  	}
-  }
 })

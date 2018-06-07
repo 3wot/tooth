@@ -1,6 +1,6 @@
-# zaoxue
+# tooth
 
-> zaoxue project
+> tooth project
 
 ## Build Setup
 
