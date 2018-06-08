@@ -87,6 +87,11 @@ export default {
                 name: 'BBB',
                 distance: '3',
                 address: 'XXXXXXXXXX',
+            },{
+                img: '../../static/item1.png',
+                name: 'CCC',
+                distance: '10.8',
+                address: 'XXXXXXXXXX',
             }
             ]
         }
@@ -202,7 +207,7 @@ export default {
 }
 .list-item-in .item-content {
     position: absolute;
-    
+
 }
 
 </style>
