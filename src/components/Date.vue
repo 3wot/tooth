@@ -34,7 +34,9 @@
             
             <div class="bar">
                 <mt-navbar v-model="selected">
-                    <mt-tab-item v-for="item in selectArr" :key="item.index" :id="item">{{item}}</mt-tab-item>
+                    <mt-tab-item v-for="item in selectArr" :key="item.index" :id="item">
+                        <span class="font-14">{{item}}</span>
+                    </mt-tab-item>
                 </mt-navbar>
             </div>
 
@@ -42,6 +44,15 @@
                 <div class="list-item" v-for="item in itemArr" :key="item.index">
                     <div class="list-item-in">
                         <img :src="item.img" class="img" alt="">
+                        <div class="item-content">
+                            <p class="content-name">{{item.name}}</p>
+                            <p class="content-address">{{item.address}}</p>
+                            <p class="content-rank">{{item.rank}}</p>
+                            <p class="content-other">治疗项目：幼儿口腔、美白</p>
+                            <div class="content-btn">
+                                <mt-button class="j-btn" size="small">立即预约</mt-button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,7 +67,7 @@
 <script>
 import Vue from 'vue'
 import Router from 'vue-router'
-import { Navbar, TabItem } from 'mint-ui'
+import { Navbar, TabItem, Button } from 'mint-ui'
 import { TabContainer, TabContainerItem } from 'mint-ui'
 // import MatePic from '@/components/MatePic'
 // import URLS from '../router/link'
@@ -80,18 +91,21 @@ export default {
             itemArr: [{
                 img: '../../static/item1.png',
                 name: 'AAA',
-                distance: '3',
+                distance: 3,
                 address: 'XXXXXXXXXX',
+                rank: 2,
             },{
                 img: '../../static/item1.png',
                 name: 'BBB',
-                distance: '3',
+                distance: 3,
                 address: 'XXXXXXXXXX',
+                rank: 2,
             },{
                 img: '../../static/item1.png',
                 name: 'CCC',
-                distance: '10.8',
+                distance: 10.8,
                 address: 'XXXXXXXXXX',
+                rank: 2,
             }
             ]
         }
@@ -207,7 +221,55 @@ export default {
 }
 .list-item-in .item-content {
     position: absolute;
+    top: 20px;
+    right: 0px;
+    bottom: 20px;
+    left: 90px;
 
 }
-
+.list-item-in .item-content .content-name {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333333;
+    line-height: 20px;
+}
+.list-item-in .item-content .content-address {
+    font-size: 12px;
+    color: #666666;
+    line-height: 20px;
+}
+.list-item-in .item-content .content-rank {
+    font-size: 12px;
+    color: #999999;
+    line-height: 20px;
+}
+.list-item-in .item-content .content-other {
+    font-size: 12px;
+    color: #999999;
+    line-height: 20px;
+}
+.list-item-in .item-content .content-btn {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 80px;
+    height: 30px;
+}
+.font-14 {
+    font-size: 14px;
+}
+.font-13 {
+    font-size: 13px;
+}
+.bold {
+    font-weight: bold;
+}
+p {
+    margin: 0px;
+}
+.j-btn {
+    background-color: #5871f5;
+    color: #ffffff;
+    border-radius: 30px;
+}
 </style>

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/Index'
+import ClinicDetail from '@/components/ClinicDetails'
+
 // import TeachType from '@/components/TeachType'
 // import TeachDetail from '@/components/TeachDetail'
 // import MapDetail from '@/components/MapDetail'
@@ -19,11 +21,11 @@ export default new Router({
       name: 'index',
       component: Index
     },
-    // {
-    //   path: '/index/:type',
-    //   name: 'index',
-    //   component: Index
-    // },
+    {
+      path: '/clinicdetail',
+      name: 'clinicdetail',
+      component: ClinicDetail
+    },
     // {
     //   path: '/teachtype/:id/:typeName',
     //   name: 'teachtype',
