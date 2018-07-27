@@ -26,7 +26,7 @@
                         class="date-search"
                         v-model="searchText"
                         cancel-text=""
-                        placeholder="喜欢的主题活动"
+                        placeholder="请输入诊所名称"
                         >
                     </mt-search>
                 </div>
@@ -35,7 +35,7 @@
             <div class="bar">
                 <mt-navbar v-model="selected">
                     <mt-tab-item v-for="item in selectArr" :key="item.index" :id="item">
-                        <span class="font-14">{{item}}</span>
+                        <span class="font-14" @click="getContent(item)">{{item}}</span>
                     </mt-tab-item>
                 </mt-navbar>
             </div>
@@ -69,10 +69,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { Navbar, TabItem, Button } from 'mint-ui'
 import { TabContainer, TabContainerItem } from 'mint-ui'
-// import MatePic from '@/components/MatePic'
-// import URLS from '../router/link'
-// import $ from 'jquery'
-// import { Toast } from 'mint-ui'
+import URLS from '../router/link'
+import $ from 'jquery'
+import { Toast } from 'mint-ui'
 
 export default {
     components:{
@@ -87,7 +86,7 @@ export default {
             topImg: [{img:'../../static/date1.png'},{img:'../../static/date1.png'},{img:'../../static/date1.png'}],
             searchText: '',
             selectArr: ['按区域','按推荐'],
-            selected: '按区域',
+            selected: '按推荐',
             itemArr: [{
                 img: '../../static/item1.png',
                 name: 'AAA',
@@ -111,8 +110,95 @@ export default {
         }
     },
     methods:{
+        // 搜索
+        changeText(n) {
+            const that = this
+            const url = URLS.getURL('getByName');
+            const data = {
+                name: n + '',
+                area_id: 1,
+                curr_page: 1,
+            }
+            that.itemArr = []
+            $.get(url, data, res => {
+                console.log(res)
+                if(!res.status) {
+                    const dd = res.data
+                    that.itemArr = dd
+                } else {
+                    Toast({
+                        message: res.message,
+                        position: 'bottom',
+                        duration: 3000
+                    });
+                }
+            })
 
+        },
+        // 推荐
+        getRecommend() {
+            const that = this
+            const url = URLS.getURL('recommend');
+            const data = {
+                area_id: 1,
+                curr_page: 1,
+            }
+            that.itemArr = []
+            $.get(url, data, res => {
+                console.log(res)
+                if(!res.status) {
+                    const dd = res.data
+                    that.itemArr = dd
+                } else {
+                    Toast({
+                        message: res.message,
+                        position: 'bottom',
+                        duration: 3000
+                    });
+                }
+            })
+        },
+        getDistance() {
+            const that = this
+            const url = URLS.getURL('distance');
+            const data = {
+                area_id: 1,
+                curr_page: 1,
+            }
+            that.itemArr = []
+            $.get(url, data, res => {
+                console.log(res)
+                if(!res.status) {
+                    const dd = res.data
+                    that.itemArr = dd
+                } else {
+                    Toast({
+                        message: res.message,
+                        position: 'bottom',
+                        duration: 3000
+                    });
+                }
+            })
+        },
+        getContent(t) {
+            const temp = t
+            if (temp == '按区域') {
+                this.getDistance()
+            } else {
+                this.getRecommend()
+            }
+        },
+        
+
+    },
+    watch:{
+        searchText:function(n,o){
+            if(n){
+                this.changeText(n)
+            }
+        }
     }
+
 }
 </script>
 

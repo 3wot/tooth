@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/Index'
-import ClinicDetail from '@/components/ClinicDetails'
+import ClinicDetails from '@/components/ClinicDetails'
+import ClinicIntro from '@/components/ClinicIntro'
+import Team from '@/components/Team'
+import Doctor from '@/components/Doctor'
 
 // import TeachType from '@/components/TeachType'
 // import TeachDetail from '@/components/TeachDetail'
@@ -19,13 +22,28 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: Index
+      component: Index,
     },
     {
       path: '/clinicdetail',
       name: 'clinicdetail',
-      component: ClinicDetail
+      component: ClinicDetails,
     },
+    {
+      path: '/clinicintro',
+      name: 'clinicintro',
+      component: ClinicIntro,
+    },
+    {
+      path: '/team',
+      name: 'team',
+      component: Team,
+    },
+    {
+      path: '/doctor',
+      name: 'doctor',
+      component: Doctor,
+    }
     // {
     //   path: '/teachtype/:id/:typeName',
     //   name: 'teachtype',

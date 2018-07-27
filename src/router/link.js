@@ -1,13 +1,14 @@
+const debug = false
 const URLS = {
-	"getToken": "/api/user/getToken.json",
-	"getUserInfo": "/api/user/getUserInfo.json",
-	"RegUser": "/api/user/RegUser.json",
-	
+	"getByName": "/dentist/search/name",
+	"recommend": "/dentist/search/recommend",
+	"distance": "/dentist/search/distance",
 
 	"getURL": function(key){
-		const host = 'http://www.xbcweb.com/';
+		const host = 'http://h.ka1em.site/api/v1'
+		const str = debug ? '?dubug=dd' : ''
 		if(this[key]){
-			return host + this[key] + "?dubug=dd";
+			return host + this[key] + str;
 		}else{
 			console.log("URLS没有当前地址");
 		}
