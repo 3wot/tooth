@@ -5,6 +5,9 @@ import ClinicDetails from '@/components/ClinicDetails'
 import ClinicIntro from '@/components/ClinicIntro'
 import Team from '@/components/Team'
 import Doctor from '@/components/Doctor'
+import Env from '@/components/Env'
+import Deal from '@/components/Deal'
+import Book from '@/components/Book'
 
 // import TeachType from '@/components/TeachType'
 // import TeachDetail from '@/components/TeachDetail'
@@ -43,6 +46,21 @@ export default new Router({
       path: '/doctor',
       name: 'doctor',
       component: Doctor,
+    },
+    {
+      path: '/env',
+      name: 'env',
+      component: Env,
+    },
+    {
+      path: '/deal',
+      name: 'deal',
+      component: Deal,
+    },
+    {
+      path: '/book',
+      name: 'book',
+      component: Book,
     }
     // {
     //   path: '/teachtype/:id/:typeName',
