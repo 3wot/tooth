@@ -142,11 +142,43 @@ export default {
         }
     },
     mounted() {
-        
-    
+        // this.init()
     },
     methods:{
+        init() {
+            const that = this;
+            const id = this.$route.params.id+'';
+            if(id){
+                this.getDetail(id)
+            } else {
+                Toast({
+                    message: 'id不存在',
+                    position: 'bottom',
+                    duration: 3000
+                });
+            }
+        },
 
+        getDetail(id) {
+            const url = URLS.getURL('introduce');
+            const data = {
+                // dentist_id=1&curr_page=1
+                curr_page: 1,
+                dentist_id: id,
+            }
+            this.teamArr = []
+            $.get(url, data, res => {
+                if(!res.status) {
+                    this.teamArr = res.data.list
+                } else {
+                    Toast({
+                        message: res.message,
+                        position: 'bottom',
+                        duration: 3000
+                    });
+                }
+            })
+        },
     }
 
   

@@ -4,7 +4,7 @@
 
         <mt-header fixed class="header" title="福利平台">
             
-            <mt-button icon="back" slot="left">北京</mt-button>
+            <mt-button icon="back" slot="left"></mt-button>
             
         </mt-header>
 
@@ -18,9 +18,9 @@
             </div>
 
             <div class="search">
-                <div class="area">
+                <!-- <div class="area">
                     区域
-                </div>
+                </div> -->
                 <div class="search-content">
                     <mt-search
                         class="date-search"
@@ -50,7 +50,7 @@
                             <p class="content-rank">{{item.rank}}</p>
                             <p class="content-other">治疗项目：幼儿口腔、美白</p>
                             <div class="content-btn">
-                                <mt-button class="j-btn" size="small">立即预约</mt-button>
+                                <mt-button class="j-btn" size="small" @click="goToDetail(item.id)">立即预约</mt-button>
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,8 @@ export default {
     },
     name: 'Date',
     mounted() {
-    
+    	// 初始化推荐
+    	// this.getRecommend()
     },
     data () {
         return {
@@ -88,18 +89,21 @@ export default {
             selectArr: ['按区域','按推荐'],
             selected: '按推荐',
             itemArr: [{
+				id: 1,
                 img: '../../static/item1.png',
                 name: 'AAA',
                 distance: 3,
                 address: 'XXXXXXXXXX',
                 rank: 2,
             },{
+            	id: 2,
                 img: '../../static/item1.png',
                 name: 'BBB',
                 distance: 3,
                 address: 'XXXXXXXXXX',
                 rank: 2,
             },{
+            	id: 3,
                 img: '../../static/item1.png',
                 name: 'CCC',
                 distance: 10.8,
@@ -188,7 +192,11 @@ export default {
                 this.getRecommend()
             }
         },
-        
+        goToDetail(id) {
+        	if(id) {
+        		this.$router.push({name:'clinicdetail', params: { id }});
+        	}
+        },
 
     },
     watch:{
@@ -253,7 +261,7 @@ export default {
 }
 .search-content {
     position: absolute;
-    left: 60px;
+    left: 10px;
     top: 0px;
     right: 0px;
     bottom: 0px;

@@ -25,17 +25,17 @@ export default new Router({
       component: Index,
     },
     {
-      path: '/clinicdetail',
+      path: '/clinicdetail/:id',
       name: 'clinicdetail',
       component: ClinicDetails,
     },
     {
-      path: '/clinicintro',
+      path: '/clinicintro/:id',
       name: 'clinicintro',
       component: ClinicIntro,
     },
     {
-      path: '/team',
+      path: '/team/:id',
       name: 'team',
       component: Team,
     },
