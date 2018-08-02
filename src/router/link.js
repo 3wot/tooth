@@ -10,7 +10,11 @@ const URLS = {
 	"introduce": "/dentist/introduce",
 	// 医生团队
 	"team": "/doctor/team",
-	//http://h.ka1em.site/api/v1/doctor/team?dentist_id=1&curr_page=1
+	// 医生详情
+	"doctorDetail": "/doctor/detail",
+	// 就诊环境
+	"environment": "/dentist/environment",
+	
 
 
 	"getURL": function(key){

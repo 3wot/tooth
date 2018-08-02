@@ -43,10 +43,11 @@
                         </router-link>
                     </div>
                     <div class="dv-btn dv-3">
-                        <span class="text-white">
-                            就诊环境    
-                        </span>
-                        
+                        <router-link :to="{ name: 'env', params: { id: $route.params.id }}">
+                            <span class="text-white">
+                                就诊环境    
+                            </span>
+                        </router-link>
                     </div>
                     <div class="dv-btn dv-4">
                         <span class="text-white">

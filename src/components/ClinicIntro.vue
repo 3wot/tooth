@@ -2,7 +2,7 @@
 <div class="clinic-intro">
     
     <mt-header fixed class="header" title="门诊介绍">
-        <mt-button icon="back" slot="left"></mt-button>
+        <mt-button icon="back" slot="left" @click="goBack"></mt-button>
     </mt-header>
 
     <div class="content-in">
@@ -88,6 +88,9 @@ export default {
                     });
                 }
             })
+        },
+        goBack() {
+            this.$router.go(-1)
         },
     }
 

@@ -4,7 +4,7 @@
 
         <mt-header fixed class="header" title="福利平台">
             
-            <mt-button icon="back" slot="left"></mt-button>
+            <mt-button icon="back" slot="left" @click="goBack"></mt-button>
             
         </mt-header>
 
@@ -197,6 +197,9 @@ export default {
         		this.$router.push({name:'clinicdetail', params: { id }});
         	}
         },
+        goBack() {
+        	this.$router.go(-1)
+        }
 
     },
     watch:{

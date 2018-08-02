@@ -9,7 +9,7 @@ import Env from '@/components/Env'
 import Deal from '@/components/Deal'
 import Book from '@/components/Book'
 
-// import TeachType from '@/components/TeachType'
+import TeachType from '@/components/TeachType'
 // import TeachDetail from '@/components/TeachDetail'
 // import MapDetail from '@/components/MapDetail'
 // import MyCollection from '@/components/MyCollection'
@@ -43,7 +43,7 @@ export default new Router({
       component: Team,
     },
     {
-      path: '/doctor',
+      path: '/doctor/:id',
       name: 'doctor',
       component: Doctor,
     },
@@ -61,9 +61,9 @@ export default new Router({
       path: '/book',
       name: 'book',
       component: Book,
-    }
+    },
     // {
-    //   path: '/teachtype/:id/:typeName',
+    //   path: '/teachtype',
     //   name: 'teachtype',
     //   component: TeachType
     // },

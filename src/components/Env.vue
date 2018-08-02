@@ -2,7 +2,7 @@
 <div class="env">
     
     <mt-header fixed class="header" title="就诊环境">
-        <mt-button icon="back" slot="left"></mt-button>
+        <mt-button icon="back" slot="left" @click="goBack"></mt-button>
     </mt-header>
 
     <div class="content-in">
@@ -69,11 +69,45 @@ export default {
         }
     },
     mounted() {
-        
-    
+        // this.init()
     },
     methods:{
+        init() {
+            const that = this;
+            const id = this.$route.params.id+'';
+            if(id){
+                this.getDetail(id)
+            } else {
+                Toast({
+                    message: 'id不存在',
+                    position: 'bottom',
+                    duration: 3000
+                });
+            }
+        },
 
+        getDetail(id) {
+            const url = URLS.getURL('environment');
+            const data = {
+                curr_page: 1,
+                dentist_id: id,
+            }
+            this.env = []
+            $.get(url, data, res => {
+                if(!res.status) {
+                    this.env = res.data.list
+                } else {
+                    Toast({
+                        message: res.message,
+                        position: 'bottom',
+                        duration: 3000
+                    });
+                }
+            })
+        },
+        goBack() {
+            this.$router.go(-1)
+        },
     }
 
   

@@ -2,35 +2,35 @@
 <div class="team">
     
     <mt-header fixed class="header" title="医生团队">
-        <mt-button icon="back" slot="left"></mt-button>
+        <mt-button icon="back" slot="left" @click="goBack"></mt-button>
     </mt-header>
 
     <div class="content-in">
         
-        <div class="i-item" v-for="item in teamArr" :key="item.index">
-            <div class="item-img">
-                <img :src="item.pic" alt="">
+            <div class="i-item" v-for="item in teamArr" :key="item.index">
+                <router-link :to="{ name: 'doctor', params: { id: item.id }}">        
+                    <div class="item-img">
+                        <img :src="item.pic" alt="">
+                    </div>
+
+                    <div class="item-content">
+                        <div class="p-1">
+                            <span style="display: inline-block;width: 60px;">{{item.name}}</span>
+                            {{item.title}}
+                            <span v-if="item.tag" style="display:inline-block;padding:0 10px;height:22px;line-height:22px;background-color:#5871f5;float:right;font-size:12px;color:#ffffff;text-align:center;font-style:italic;">
+                            {{item.tag}}
+                            </span>
+                        </div>
+                        <div class="p-2">
+                            <span>{{item.section}}</span>
+                        </div>
+                        <div class="p-3">
+                            <span>专业特长：{{item.special}}</span>
+                        </div>
+
+                    </div>
+                </router-link>
             </div>
-
-            <div class="item-content">
-                <div class="p-1">
-                    <span style="display: inline-block;width: 60px;">{{item.name}}</span>
-                    {{item.title}}
-                    <span v-if="item.tag" style="display:inline-block;padding:0 10px;height:22px;line-height:22px;background-color:#5871f5;float:right;font-size:12px;color:#ffffff;text-align:center;font-style:italic;">
-                    {{item.tag}}
-                    </span>
-                </div>
-                <div class="p-2">
-                    <span>{{item.section}}</span>
-                </div>
-                <div class="p-3">
-                    <span>专业特长：{{item.special}}</span>
-                </div>
-
-            </div>
-
-        </div>
-        
 
 
 
@@ -67,7 +67,7 @@ export default {
                     special: "幼儿口腔 美白 洗牙"
                 },
                 {
-                    id: 1,
+                    id: 2,
                     name: "熊晓燕",
                     pic: "../../static/date1.png",
                     section: "口腔科",
@@ -76,7 +76,7 @@ export default {
                     special: "幼儿口腔 美白 洗牙"
                 },
                 {
-                    id: 1,
+                    id: 3,
                     name: "熊晓燕",
                     pic: "../../static/date1.png",
                     section: "口腔科",
@@ -85,7 +85,7 @@ export default {
                     special: "幼儿口腔 美白 洗牙"
                 },
                 {
-                    id: 1,
+                    id: 4,
                     name: "熊晓燕",
                     pic: "../../static/date1.png",
                     section: "口腔科",
@@ -178,6 +178,9 @@ export default {
                     });
                 }
             })
+        },
+        goBack() {
+            this.$router.go(-1)
         },
     }
 
