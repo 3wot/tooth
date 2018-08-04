@@ -2,7 +2,7 @@
 <div class="book">
     
     <mt-header fixed class="header" title="预约挂号">
-        <mt-button icon="back" slot="left"></mt-button>
+        <mt-button icon="back" slot="left" @click="goBack"></mt-button>
     </mt-header>
 
     <div class="content-in">
@@ -32,30 +32,37 @@
                 <p class="title-1">
                     <span>意向医生</span>
                     <select class="title-select">
-                        <option value="1">拔牙</option>
-                        <option value="2">种植牙</option>
-                        <option value="3">洗牙</option>
+                        <option value="1">张医生</option>
+                        <option value="2">李医生</option>
+                        <option value="3">刘医生</option>
                     </select>
                 </p>
                 <p class="title-1">
                     <span>就诊人群</span>
                     <select class="title-select">
-                        <option value="1">拔牙</option>
-                        <option value="2">种植牙</option>
-                        <option value="3">洗牙</option>
+                        <option value="1">老人</option>
+                        <option value="2">儿童</option>
+                        <option value="3">孕妇</option>
                     </select>
                 </p>
                 <p class="title-1">
                     <span>就诊时间</span>
-                    <select class="title-select">
-                        <option value="1">拔牙</option>
-                        <option value="2">种植牙</option>
-                        <option value="3">洗牙</option>
-                    </select>
+                    <!-- <mt-datetime-picker
+                        class="title-select"
+                        v-model="time"
+                        type="datetime"
+                        >
+                    </mt-datetime-picker> -->
+
+                    <input type="date" class="title-select" name="">
                 </p>
             </div>
 
-            <span class="deal-link">预约即同意《<span style="color:blue;">服务协议</span>》</span>
+            <span class="deal-link">预约即同意《
+                <router-link :to="{ name: 'deal'}">
+                    <span style="color:blue;">服务协议</span>
+                </router-link>
+            》</span>
         </div>
     </div>
 
@@ -73,6 +80,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import { Cell, Button } from 'mint-ui'
+import { DatetimePicker } from 'mint-ui'
 import { Progress } from 'mint-ui'
 import { Toast } from 'mint-ui'
 import URLS from '../router/link'
@@ -96,6 +104,7 @@ export default {
             time_interval: '',
             book_time: '',
             desc_id: '',
+            time: '',
         }
     },
     mounted() {
@@ -103,7 +112,9 @@ export default {
     
     },
     methods:{
-
+        goBack() {
+            this.$router.go(-1)
+        },
     }
 
   
@@ -144,6 +155,7 @@ export default {
     background-color: #5871f5;
     color: #ffffff;
     width: 100%;
+    border-radius: 4px;
 }
 .p-1 {
     background-color: #ffffff;

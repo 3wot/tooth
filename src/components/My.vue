@@ -13,7 +13,12 @@
 
     <div>
       
-        <mt-cell title="我的收藏" is-link to="/MyCollection">
+        <mt-cell title="常用联系人" is-link to="/List">
+          <!-- <span></span> -->
+          <img slot="icon" src="../../static/logo.png" width="24" height="24">
+        </mt-cell>
+
+        <mt-cell title="预约记录" is-link to="/MyCollection">
           <!-- <span></span> -->
           <img slot="icon" src="../../static/logo.png" width="24" height="24">
         </mt-cell>

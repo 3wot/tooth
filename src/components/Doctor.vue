@@ -55,7 +55,7 @@
 
     <div class="bottom">
         <div style="margin: 7px 15px;">
-            <mt-button class="j-btn">立即预约</mt-button>    
+            <mt-button class="j-btn" @click="goToBook">立即预约</mt-button>    
         </div>
         
     </div>
@@ -168,6 +168,12 @@ export default {
         },
         goBack() {
             this.$router.go(-1)
+        },
+        goToBook() {
+            const hid = this.$route.params.hid
+            if(hid) {
+                this.$router.push({name:'book', params: { id: hid }});
+            }
         },
     }
 

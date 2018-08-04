@@ -42,18 +42,20 @@
 
             <div class="list">
                 <div class="list-item" v-for="item in itemArr" :key="item.index">
-                    <div class="list-item-in">
-                        <img :src="item.img" class="img" alt="">
-                        <div class="item-content">
-                            <p class="content-name">{{item.name}}</p>
-                            <p class="content-address">{{item.address}}</p>
-                            <p class="content-rank">{{item.rank}}</p>
-                            <p class="content-other">治疗项目：幼儿口腔、美白</p>
-                            <div class="content-btn">
-                                <mt-button class="j-btn" size="small" @click="goToDetail(item.id)">立即预约</mt-button>
+                    <!-- <router-link :to="{ name: 'clinicdetail', params: { id: item.id }}"> -->
+                        <div class="list-item-in" @click="goToDetail(item.id)">
+                            <img :src="item.img" class="img" alt="">
+                            <div class="item-content">
+                                <p class="content-name">{{item.name}}</p>
+                                <p class="content-address">{{item.address}}</p>
+                                <p class="content-rank">{{item.rank}}</p>
+                                <p class="content-other">治疗项目：幼儿口腔、美白</p>
+                                <div class="content-btn">
+                                    <mt-button class="j-btn" size="small" @click.stop="goToBook(item.id)">立即预约</mt-button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <!-- </router-link> -->
                 </div>
             </div>
             
@@ -196,6 +198,11 @@ export default {
         	if(id) {
         		this.$router.push({name:'clinicdetail', params: { id }});
         	}
+        },
+        goToBook(id) {
+            if(id) {
+                this.$router.push({name:'book', params: { id }});
+            }
         },
         goBack() {
         	this.$router.go(-1)

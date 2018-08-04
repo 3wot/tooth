@@ -68,7 +68,7 @@
         
         <div class="bottom">
             <div style="margin: 5px 15px;">
-                <mt-button class="j-btn">立即预约</mt-button>    
+                <mt-button class="j-btn" @click="goToBook">立即预约</mt-button>    
             </div>
             
         </div>
@@ -141,6 +141,12 @@ export default {
                     });
                 }
             })
+        },
+        goToBook() {
+            const hid = this.$route.params.id
+            if(hid) {
+                this.$router.push({name:'book', params: { id: hid }});
+            }
         },
     }
 }

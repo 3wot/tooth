@@ -2,7 +2,7 @@
 <div class="deal">
     
     <mt-header fixed class="header" title="协议须知">
-        <mt-button icon="back" slot="left"></mt-button>
+        <mt-button icon="back" slot="left" @click="goBack"></mt-button>
     </mt-header>
 
     <div class="content-in">
@@ -66,7 +66,9 @@ export default {
     
     },
     methods:{
-
+        goBack() {
+            this.$router.go(-1)
+        },
     }
 
   
@@ -100,7 +102,6 @@ export default {
     margin: 0px 15px;
     height: 100%;
     overflow-y: auto;
-    background-color: #ddd;
 }
 
 </style>

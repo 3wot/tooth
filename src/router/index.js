@@ -8,6 +8,7 @@ import Doctor from '@/components/Doctor'
 import Env from '@/components/Env'
 import Deal from '@/components/Deal'
 import Book from '@/components/Book'
+import List from '@/components/List'
 
 import TeachType from '@/components/TeachType'
 // import TeachDetail from '@/components/TeachDetail'
@@ -43,7 +44,7 @@ export default new Router({
       component: Team,
     },
     {
-      path: '/doctor/:id',
+      path: '/doctor/:id/:hid',
       name: 'doctor',
       component: Doctor,
     },
@@ -58,9 +59,14 @@ export default new Router({
       component: Deal,
     },
     {
-      path: '/book',
+      path: '/book/:id',
       name: 'book',
       component: Book,
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: List,
     },
     // {
     //   path: '/teachtype',

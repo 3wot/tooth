@@ -8,7 +8,7 @@
     <div class="content-in">
         
             <div class="i-item" v-for="item in teamArr" :key="item.index">
-                <router-link :to="{ name: 'doctor', params: { id: item.id }}">        
+                <router-link :to="{ name: 'doctor', params: { id: item.id, hid: $route.params.id }}"> 
                     <div class="item-img">
                         <img :src="item.pic" alt="">
                     </div>
