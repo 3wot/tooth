@@ -14,6 +14,9 @@ const URLS = {
 	"doctorDetail": "/doctor/detail",
 	// 就诊环境
 	"environment": "/dentist/environment",
+	// 预约备选项
+	"bookOp": "/order/book_page",
+	
 	
 
 

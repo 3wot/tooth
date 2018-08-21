@@ -108,12 +108,27 @@ export default {
         }
     },
     mounted() {
-        
-    
+        this.getOptions()
     },
     methods:{
         goBack() {
             this.$router.go(-1)
+        },
+        getOptions () {
+            const url = URLS.getURL('bookOp');
+            const data = {}
+            $.get(url, data, res => {
+                console.log('getOptions:',res)
+                if(!res.status) {
+                    console.log(res)
+                } else {
+                    Toast({
+                        message: res.message,
+                        position: 'bottom',
+                        duration: 3000
+                    });
+                }
+            })
         },
     }
 
