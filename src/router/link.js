@@ -16,9 +16,12 @@ const URLS = {
 	"environment": "/dentist/environment",
 	// 预约备选项
 	"bookOp": "/order/book_page",
+	// 预约提交
+	"book": "/order/book",
+	// 就诊人
+	"list": "/patient/list",
 	
 	
-
 
 	"getURL": function(key){
 		const host = 'http://h.ka1em.site/api/v1'

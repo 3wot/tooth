@@ -17,32 +17,29 @@
             <div class="p-2">
                 <p class="title-1" style="border-bottom: 1px solid #dddddd;">就诊人信息</p>
                 <p class="title-1">
-                    <span>就诊人姓名： {{book_name}}</span>
-                    <mt-button style="float: right;margin-top: 3px;margin-right: 15px;" size="small">常用就诊人
-                    </mt-button>
+                    <span>就诊人姓名</span>
+                    <select class="title-select" v-model="book_name">
+                        <option v-for="item in list" :value="item.id">{{item.name}}</option>
+                    </select>
+                    <!-- <mt-button style="float: right;margin-top: 3px;margin-right: 15px;" size="small">常用就诊人
+                    </mt-button> -->
                 </p>
-                <p class="title-1">
+                <p class="title-1" v-model="desc_id">
                     <span>病情描述</span>
                     <select class="title-select">
-                        <option value="1">拔牙</option>
-                        <option value="2">种植牙</option>
-                        <option value="3">洗牙</option>
+                        <option v-for="item in illness_desc" :value="item.desc_id">{{item.name}}</option>
                     </select>
                 </p>
                 <p class="title-1">
                     <span>意向医生</span>
-                    <select class="title-select">
-                        <option value="1">张医生</option>
-                        <option value="2">李医生</option>
-                        <option value="3">刘医生</option>
+                    <select class="title-select" v-model="dentist_id">
+                        <option v-for="item in doctor_info" :value="item.doctor_id">{{item.name}}</option>
                     </select>
                 </p>
                 <p class="title-1">
                     <span>就诊人群</span>
-                    <select class="title-select">
-                        <option value="1">老人</option>
-                        <option value="2">儿童</option>
-                        <option value="3">孕妇</option>
+                    <select class="title-select" v-model="age_id">
+                        <option v-for="item in patient_age" :value="item.age_id">{{item.name}}</option>
                     </select>
                 </p>
                 <p class="title-1">
@@ -54,7 +51,7 @@
                         >
                     </mt-datetime-picker> -->
 
-                    <input type="date" class="title-select" name="">
+                    <input type="date" v-model="book_time" class="title-select" name="">
                 </p>
             </div>
 
@@ -68,7 +65,7 @@
 
     <div class="bottom">
         <div style="margin: 7px 15px;">
-            <mt-button class="j-btn">立即预约</mt-button>    
+            <mt-button class="j-btn" @click="clickOK">立即预约</mt-button>    
         </div>
         
     </div>
@@ -97,14 +94,71 @@ export default {
             name: '张三',
             tel: '12233333333',
             hospital: '北京圣恩口腔医院',
+
             book_name: '',
             dentist_id: '',
-            relation_id: '',
+            relation_id: 1,
             age_id: '',
-            time_interval: '',
+            time_interval: 1,
             book_time: '',
-            desc_id: '',
+            desc_id: 1,
             time: '',
+            
+            list: [
+                {
+                    id: 8,
+                    name: "就诊人A",
+                    phone: "14589872223",
+                    type: 1,
+                    type_name: "常用",
+                },
+                {
+                    id: 7,
+                    name: "就诊人B",
+                    phone: "14589878658",
+                    type: 1,
+                    type_name: "不常用",
+                }
+            ],
+            patient_age: [
+                {
+                    age_id: 1,
+                    name: "小孩",
+                },
+                {
+                    age_id: 2,
+                    name: "老人",
+                },
+                {
+                    age_id: 3,
+                    name: "孕妇",
+                }
+            ],
+            illness_desc: [
+                {
+                desc_id: 1,
+                name: "种牙2",
+                },
+                {
+                desc_id: 2,
+                name: "拔牙",
+                },
+                {
+                desc_id: 3,
+                name: "烧了",
+                }
+            ],
+            relation: [],
+            doctor_info: [
+                {
+                    doctor_id: 4,
+                    name: "医生c",
+                },
+                {
+                    doctor_id: 5,
+                    name: "医生D",
+                },
+            ],
         }
     },
     mounted() {
@@ -120,7 +174,59 @@ export default {
             $.get(url, data, res => {
                 console.log('getOptions:',res)
                 if(!res.status) {
-                    console.log(res)
+                    const { patient_age, illness_desc, relation, doctor_info } = res.data || {}
+                    this.patient_age = patient_age
+                    this.illness_desc = illness_desc
+                    this.relation = relation
+                    this.doctor_info = doctor_info
+                } else {
+                    Toast({
+                        message: res.message,
+                        position: 'bottom',
+                        duration: 3000
+                    });
+                }
+            })
+        },
+        getName () {
+            const url = URLS.getURL('list');
+            const data = {}
+            $.get(url, data, res => {
+                console.log('getOptions:',res)
+                if(!res.status) {
+                    this.list = res.data.list
+                } else {
+                    Toast({
+                        message: res.message,
+                        position: 'bottom',
+                        duration: 3000
+                    });
+                }
+            })
+        },
+        // 点击提交
+        clickOK () {
+            console.log('clickOK')
+            
+            const that = this
+            const url = URLS.getURL('book');
+            const data = {
+                book_name: this.book_name,
+                dentist_id: this.dentist_id,
+                relation_id: this.relation_id,
+                age_id: this.age_id,
+                time_interval: this.time_interval,
+                book_time: this.book_time,
+                desc_id: this.desc_id,
+            }
+            $.post(url, data, res => {
+                if(!res.status) {
+                    that.goBack()
+                    Toast({
+                        message: "预约成功",
+                        position: 'bottom',
+                        duration: 3000
+                    });
                 } else {
                     Toast({
                         message: res.message,
