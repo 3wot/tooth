@@ -162,7 +162,7 @@ export default {
         }
     },
     mounted() {
-        this.getOptions()
+        // this.getOptions()
     },
     methods:{
         goBack() {
@@ -172,7 +172,7 @@ export default {
             const url = URLS.getURL('bookOp');
             const data = {}
             $.get(url, data, res => {
-                console.log('getOptions:',res)
+                console.log(res)
                 if(!res.status) {
                     const { patient_age, illness_desc, relation, doctor_info } = res.data || {}
                     this.patient_age = patient_age
@@ -206,8 +206,6 @@ export default {
         },
         // 点击提交
         clickOK () {
-            console.log('clickOK')
-            
             const that = this
             const url = URLS.getURL('book');
             const data = {
