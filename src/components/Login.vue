@@ -7,21 +7,17 @@
 
       <div style="">
             
-            <mt-field label="用户名" placeholder="请输入用户名" v-model="username"></mt-field>
-
-            <mt-field label="图片验证" placeholder="请输入图片码" v-model="captcha">
-                <img ref="imgCode" height="27px" width="90px" alt="图片验证" @click="getCodeImg">
-            </mt-field>
+            
             
             <mt-field label="手机号" placeholder="请输入手机号" type="tel" v-model="phone"></mt-field>
 
-            <mt-field label="验证码" placeholder="请输入验证码" type="password" v-model="password">
+            <mt-field label="验证码" placeholder="请输入验证码" type="text" v-model="password">
                 <mt-button size="small" @click.native="handleClick" :disabled="passwordTemp" type="primary">{{passwordText}}</mt-button>
             </mt-field>  
 
       </div>
       
-      <mt-button @click.native="loginClick" :disabled="!hasSend" style="margin-top:1rem;" size="large" type="primary">注册</mt-button>
+      <mt-button @click.native="loginClick" :disabled="!hasSend" style="margin-top:1rem;" size="large" type="primary">登录</mt-button>
       <mt-button @click.native="gobackClick" style="margin-top:1rem;" size="large" type="primary">返回</mt-button>
       
 
@@ -49,7 +45,6 @@ export default {
   data () {
     return {
       token: '',
-      username: '',
       phone: '',
       password: '',
       captcha: '',
@@ -67,14 +62,13 @@ export default {
     handleClick() {
       const that = this
       if(this.phone){//如果号码不为空
-        if(this.captcha){
-          const sendCodeMsg = URLS.getURL('sendCodeMsg');
+        
+          const url = URLS.getURL('sendCode');
           const params = {
             phone: this.phone,
-            code: this.captcha
-          }          
-          $.get(sendCodeMsg, params, function(res){
-            if(res.flag){
+          }  
+          $.get(url, params, function(res){
+            if(!res.status){
               that.hasSend = true
               that.countDown()// 发送成功，倒计时
             }else{//短信码失败
@@ -87,13 +81,7 @@ export default {
               that.getCodeImg()
             }
           })
-        }else{
-          Toast({
-            message: '请填写图片验证码',
-            position: 'bottom',
-            duration: 3000
-          });  
-        }
+
       }else{
         Toast({
           message: '请填写手机号码',

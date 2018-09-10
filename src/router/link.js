@@ -20,6 +20,8 @@ const URLS = {
 	"book": "/order/book",
 	// 就诊人
 	"list": "/patient/list",
+	// 验证码
+	"sendCode": "/register/send",
 	
 	
 

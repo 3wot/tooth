@@ -9,8 +9,9 @@ import Env from '@/components/Env'
 import Deal from '@/components/Deal'
 import Book from '@/components/Book'
 import List from '@/components/List'
-
+import Login from '@/components/Login'
 import TeachType from '@/components/TeachType'
+
 // import TeachDetail from '@/components/TeachDetail'
 // import MapDetail from '@/components/MapDetail'
 // import MyCollection from '@/components/MyCollection'
@@ -67,6 +68,11 @@ export default new Router({
       path: '/list',
       name: 'list',
       component: List,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
     },
     // {
     //   path: '/teachtype',
