@@ -22,6 +22,9 @@ const URLS = {
 	"list": "/patient/list",
 	// 验证码
 	"sendCode": "/register/send",
+	// 登录
+	"login": "/login",
+
 	
 	
 

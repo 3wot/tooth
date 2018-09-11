@@ -32,13 +32,13 @@
                 </div>
             </div>
             
-            <div class="bar">
+<!--             <div class="bar">
                 <mt-navbar v-model="selected">
                     <mt-tab-item v-for="item in selectArr" :key="item.index" :id="item">
                         <span class="font-14" @click="getContent(item)">{{item}}</span>
                     </mt-tab-item>
                 </mt-navbar>
-            </div>
+            </div> -->
 
             <div class="list">
                 <div class="list-item" v-for="item in itemArr" :key="item.index">
@@ -243,7 +243,7 @@ export default {
 }
 .date .panel-in {
     width: 100vw;
-    height: 55.55vw;
+    height: 45vw;
 }
 .date .top-img {
     height: 100%;
@@ -299,7 +299,7 @@ export default {
 }
 .date .list {
     position: absolute;
-    top: calc(55.55vw + 95px);
+    top: calc(45vw + 45px);
     right: 0;
     left: 0;
     bottom: 0;
