@@ -50,7 +50,7 @@ export default new Router({
       component: Doctor,
     },
     {
-      path: '/env',
+      path: '/env/:id',
       name: 'env',
       component: Env,
     },

@@ -58,7 +58,7 @@ export default {
         }
     },
     mounted() {
-        // this.init()
+        this.init()
     },
     methods:{
 
@@ -77,13 +77,13 @@ export default {
         },
 
         getDetail(id) {
-            const url = URLS.getURL('actironment');
+            const url = URLS.getURL('activity');
             const data = {
-                curr_page: 1,
-                dentist_id: id,
+                
             }
             this.act = []
-            $.get(url, data, res => {
+            $.get(url, data, resStr => {
+                const res = JSON.parse(resStr)
                 if(!res.status) {
                     this.act = res.data.list
                 } else {

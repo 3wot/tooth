@@ -142,7 +142,7 @@ export default {
         }
     },
     mounted() {
-        // this.init()
+        this.init()
     },
     methods:{
         init() {
@@ -160,14 +160,15 @@ export default {
         },
 
         getDetail(id) {
-            const url = URLS.getURL('introduce');
+            const url = URLS.getURL('team');
             const data = {
                 // dentist_id=1&curr_page=1
                 curr_page: 1,
                 dentist_id: id,
             }
             this.teamArr = []
-            $.get(url, data, res => {
+            $.get(url, data, resStr => {
+                const res = JSON.parse(resStr)
                 if(!res.status) {
                     this.teamArr = res.data.list
                 } else {

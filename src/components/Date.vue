@@ -4,7 +4,7 @@
 
         <mt-header fixed class="header" title="福利平台">
             
-            <mt-button icon="back" slot="left" @click="goBack"></mt-button>
+            <!-- <mt-button icon="back" slot="left" @click="goBack"></mt-button> -->
             
         </mt-header>
 
@@ -47,9 +47,9 @@
                             <img :src="item.img" class="img" alt="">
                             <div class="item-content">
                                 <p class="content-name">{{item.name}}</p>
-                                <p class="content-address">{{item.address}}</p>
-                                <p class="content-rank">{{item.rank}}</p>
-                                <p class="content-other">治疗项目：幼儿口腔、美白</p>
+                                <p class="content-address">地址：{{item.address}}</p>
+                                <p class="content-rank">评分：{{item.rank}}</p>
+                                <p class="content-other">治疗项目：{{item.therapy_project}}</p>
                                 <div class="content-btn">
                                     <mt-button class="j-btn" size="small" @click.stop="goToBook(item.id)">立即预约</mt-button>
                                 </div>
@@ -82,7 +82,7 @@ export default {
     name: 'Date',
     mounted() {
     	// 初始化推荐
-    	// this.getRecommend()
+    	this.getRecommend()
     },
     data () {
         return {
@@ -126,11 +126,11 @@ export default {
                 curr_page: 1,
             }
             that.itemArr = []
-            $.get(url, data, res => {
-                console.log(res)
+            $.get(url, data, resStr => {
+                const res = JSON.parse(resStr)
                 if(!res.status) {
                     const dd = res.data
-                    that.itemArr = dd
+                    that.itemArr = dd.list
                 } else {
                     Toast({
                         message: res.message,
@@ -150,10 +150,11 @@ export default {
                 curr_page: 1,
             }
             that.itemArr = []
-            $.get(url, data, res => {
+            $.get(url, data, resStr => {
+                const res = JSON.parse(resStr)
                 console.log(res)
                 if(!res.status) {
-                    const dd = res.data
+                    const dd = res.data.list
                     that.itemArr = dd
                 } else {
                     Toast({

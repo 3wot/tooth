@@ -131,12 +131,12 @@ export default {
     },
     mounted() {
         
-        // this.init()
+        this.init()
     },
     methods:{
         init() {
             const that = this;
-            const id = this.$route.params.id+'';
+            const id = this.$route.params.id + '';
             if(id){
                 this.getDetail(id)
             } else {
@@ -154,7 +154,8 @@ export default {
                 doctor_id: id,
             }
             this.doctor = {}
-            $.get(url, data, res => {
+            $.get(url, data, resStr => {
+                const res = JSON.parse(resStr)
                 if(!res.status) {
                     this.doctor = res.data
                 } else {

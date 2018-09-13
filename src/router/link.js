@@ -24,6 +24,8 @@ const URLS = {
 	"sendCode": "/register/send",
 	// 登录
 	"login": "/login",
+	// 活动
+	"activity": "/activity/list",
 
 	
 	

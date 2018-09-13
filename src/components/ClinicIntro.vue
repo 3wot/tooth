@@ -54,7 +54,7 @@ export default {
     },
     mounted() {
         // 初始化
-        // this.init()
+        this.init()
     },
     methods:{
         init() {
@@ -76,8 +76,9 @@ export default {
             const data = {
                 dentist_id: id,
             }
-            this.info = {}
-            $.get(url, data, res => {
+            // this.info = {}
+            $.get(url, data, resStr => {
+                const res = JSON.parse(resStr)
                 if(!res.status) {
                     this.info = res.data
                 } else {

@@ -2,6 +2,11 @@
 
     <div class="clinic">
 
+
+         <mt-header fixed class="header" title="门诊介绍">
+            <mt-button icon="back" slot="left" @click="goBack"></mt-button>
+        </mt-header>
+
         <div class="content-in">
             <div class="panel-in">
                 <mt-swipe :auto="0">
@@ -14,16 +19,17 @@
             <div class="clinic-des">
                 <p class="des-name">{{info.name}}</p>
                 <div class="des-con">
-                    <p class="con-address">{{info.address}}</p>
+                    <p class="con-address">地址：{{info.address}}</p>
                     <p class="con-address">营业时间：{{info.work_time}}</p>
+                    <p class="con-address">电话：{{info.telphone}}</p>
                 </div>
-                <div class="des-tel">
+                <!-- <div class="des-tel">
                     <a :href="'tel:' + info.telphone">
                         
                     </a>
                     <img class="tel-img" src="../../static/date1.png" alt="">
                     <p class="tel-txt">电话咨询</p>
-                </div>
+                </div> -->
             </div>
 
             <div class="btns">
@@ -49,7 +55,7 @@
                             </span>
                         </router-link>
                     </div>
-                    <div class="dv-btn dv-4">
+<!--                     <div class="dv-btn dv-4">
                         <span class="text-white">
                             价格清单    
                         </span>
@@ -59,7 +65,7 @@
                         <span class="text-white">
                             活动列表    
                         </span>
-                    </div>
+                    </div> -->
                     <div class="dv-btn dv-6"></div>   
                 </div>
             </div>
@@ -94,7 +100,7 @@ export default {
     name: 'ClinicDetails',
     mounted() {
         // 初始化
-        // this.init()
+        this.init()
     },
     data () {
         return {
@@ -111,7 +117,7 @@ export default {
     methods:{
         init() {
             const that = this;
-            const id = this.$route.params.id+'';
+            const id = this.$route.params.id + '';
             if(id){
                 this.getDetail(id)
             } else {
@@ -129,8 +135,8 @@ export default {
                 dentist_id: id,
             }
             this.info = {}
-            $.get(url, data, res => {
-                console.log(this.info)
+            $.get(url, data, resStr => {
+                const res = JSON.parse(resStr)
                 if(!res.status) {
                     this.info = res.data.info
                 } else {
@@ -148,6 +154,9 @@ export default {
                 this.$router.push({name:'book', params: { id: hid }});
             }
         },
+        goBack() {
+            this.$router.go(-1)
+        },
     }
 }
 </script>
@@ -162,6 +171,9 @@ export default {
     width: 100%;
     bottom: 55px;
     font-size: 14px;
+}
+.clinic .header {
+    background-color: #5871f5;
 }
 .clinic .content-in{
     position: absolute;
@@ -206,12 +218,12 @@ export default {
     left: 15px;
     right: 65px;
     height: 60px;
-    border-right: 1px solid #dddddd;
+    
 }
 .con-address {
     font-size: 13px;
     color: #666666;
-    line-height: 30px;
+    line-height: 20px;
 }
 .des-tel {
     position: absolute;
