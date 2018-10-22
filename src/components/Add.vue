@@ -1,22 +1,14 @@
 <template>
 <div class="linkList">
     
-    <mt-header fixed class="header" title="常用联系人">
+    <mt-header fixed class="header" title="添加联系人">
         <mt-button icon="back" slot="left" @click="goBack"></mt-button>
     </mt-header>
 
     <div class="content-in">
-        <div class="img-item" v-for="item in linkList" :key="item.index">
-            <div class="name">姓名：{{item.name}}</div>
-            <div class="tel">电话：{{item.phone}}</div>
-        </div>
-        
-        <div class="img-item">
-            <div class="name" style="text-align: center;" @click='gotoAdd'>
-                + 添加联系人
-            </div>
-        </div>
-        
+        <mt-field label="姓名" placeholder="请输入姓名" v-model="name"></mt-field>
+        <mt-field label="电话" placeholder="请输入电话" type="email" v-model="phone"></mt-field>
+        <mt-button @click.native="add" style="margin-top:1rem;" size="large" type="primary">确定</mt-button>
     </div>
 
 </div>
@@ -39,45 +31,31 @@ export default {
     name: 'linkListivity',
     data () {
         return {
-            linkList: [
-            // {
-            //     id: 1,
-            //     name: "患者A",
-            //     phone: "13456789076",
-            //     type: 1,
-            //     type_name: "不常用"
-            // },
-            // {
-            //     id: 1,
-            //     name: "患者B",
-            //     phone: "13456789076",
-            //     type: 1,
-            //     type_name: "不常用"
-            // },
-            // {
-            //     id: 1,
-            //     name: "患者C",
-            //     phone: "13456789076",
-            //     type: 1,
-            //     type_name: "不常用"
-            // },
-            ]
+            name: '',
+            phone: '',
         }
     },
     mounted() {
-        this.getDetail()
+
     },
     methods:{
-        // 获取列表
-        getDetail() {
-            let url = URLS.getURL('list');
+
+        add() {
+            let url = URLS.getURL('add');
             const token = this.userInfo.token
             if (token) {
                 url = url + '?token=' + token;
-                $.get(url, resStr => {
+                const { name, phone } = this
+                const data = {
+                    name,
+                    phone,
+                    type:'2',
+                    token,
+                }
+                $.post(url, data, resStr => {
                     const res = JSON.parse(resStr)
                     if(!res.status) {
-                        this.linkList = res.data.list
+                        this.$router.push({name:'list'});
                     } else {
                         Toast({
                             message: res.message,
@@ -93,18 +71,12 @@ export default {
                     duration: 3000
                 });
             }
+
         },
 
         goBack() {
             this.$router.go(-1)
         },
-        goToIndex() {
-            this.$router.push({name:'index'});
-        },
-        gotoAdd() {
-            this.$router.push({name:'add'});  
-        },
-
 
     }
 

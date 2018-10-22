@@ -26,6 +26,8 @@ const URLS = {
 	"login": "/login",
 	// 活动
 	"activity": "/activity/list",
+	// 增加就诊人
+	"add": "/patient/add",
 
 	
 	

@@ -214,6 +214,8 @@ export default {
         searchText:function(n,o){
             if(n){
                 this.changeText(n)
+            } else {
+                this.getRecommend()
             }
         }
     }

@@ -10,6 +10,7 @@ import Deal from '@/components/Deal'
 import Book from '@/components/Book'
 import List from '@/components/List'
 import Login from '@/components/Login'
+import Add from '@/components/Add'
 import TeachType from '@/components/TeachType'
 
 // import TeachDetail from '@/components/TeachDetail'
@@ -74,6 +75,12 @@ export default new Router({
       name: 'login',
       component: Login,
     },
+    {
+      path: '/add',
+      name: 'add',
+      component: Add,
+    },
+
     // {
     //   path: '/teachtype',
     //   name: 'teachtype',

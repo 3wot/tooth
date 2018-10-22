@@ -7,12 +7,12 @@
 
     <div class="content-in">
         <div style="position:relative;height: 100%;">
-            <div class="p-1">
+            <!-- <div class="p-1">
                 <p class="title-1" style="border-bottom: 1px solid #dddddd;">预约人信息</p>
                 <p class="title-1">预约人： {{name}}</p>
                 <p class="title-1">联系方式： {{tel}}</p>
                 <p class="title-1">出诊医院：{{hospital}}</p>
-            </div>
+            </div> -->
 
             <div class="p-2">
                 <p class="title-1" style="border-bottom: 1px solid #dddddd;">就诊人信息</p>
@@ -36,22 +36,25 @@
                         <option v-for="item in doctor_info" :value="item.doctor_id">{{item.name}}</option>
                     </select>
                 </p>
-                <p class="title-1">
+                <!-- <p class="title-1">
                     <span>就诊人群</span>
                     <select class="title-select" v-model="age_id">
                         <option v-for="item in patient_age" :value="item.age_id">{{item.name}}</option>
                     </select>
-                </p>
+                </p> -->
                 <p class="title-1">
-                    <span>就诊时间</span>
-                    <!-- <mt-datetime-picker
-                        class="title-select"
-                        v-model="time"
-                        type="datetime"
-                        >
-                    </mt-datetime-picker> -->
-
-                    <input type="date" v-model="book_time" class="title-select" name="">
+                    <span @click="dateOpen">点击选择日期</span>
+                    <span class="title-select">{{book_time_str}}</span>
+                    <mt-datetime-picker
+                        ref="picker"
+                        v-model="book_time"
+                        type="date"
+                        year-format="{value}年"
+                        month-format="{value}月"
+                        date-format="{value}日"
+                       >
+                      >
+                    </mt-datetime-picker>
                 </p>
             </div>
 
@@ -89,6 +92,12 @@ export default {
         Cell,Progress
     },
     name: 'Book',
+    computed: {
+        book_time_str : function() {
+            const book_time = this.book_time
+            return book_time? book_time.getFullYear() + '-'+(book_time.getMonth()+1)+'-'+ book_time.getDate():""
+        },
+    },
     data () {
         return {
             name: '张三',
@@ -105,79 +114,84 @@ export default {
             time: '',
             
             list: [
-                {
-                    id: 8,
-                    name: "就诊人A",
-                    phone: "14589872223",
-                    type: 1,
-                    type_name: "常用",
-                },
-                {
-                    id: 7,
-                    name: "就诊人B",
-                    phone: "14589878658",
-                    type: 1,
-                    type_name: "不常用",
-                }
+                // {
+                //     id: 8,
+                //     name: "就诊人A",
+                //     phone: "14589872223",
+                //     type: 1,
+                //     type_name: "常用",
+                // },
+                // {
+                //     id: 7,
+                //     name: "就诊人B",
+                //     phone: "14589878658",
+                //     type: 1,
+                //     type_name: "不常用",
+                // }
             ],
-            patient_age: [
-                {
-                    age_id: 1,
-                    name: "小孩",
-                },
-                {
-                    age_id: 2,
-                    name: "老人",
-                },
-                {
-                    age_id: 3,
-                    name: "孕妇",
-                }
-            ],
+            // patient_age: [
+            //     // {
+            //     //     age_id: 1,
+            //     //     name: "小孩",
+            //     // },
+            //     // {
+            //     //     age_id: 2,
+            //     //     name: "老人",
+            //     // },
+            //     // {
+            //     //     age_id: 3,
+            //     //     name: "孕妇",
+            //     // }
+            // ],
             illness_desc: [
-                {
-                desc_id: 1,
-                name: "种牙2",
-                },
-                {
-                desc_id: 2,
-                name: "拔牙",
-                },
-                {
-                desc_id: 3,
-                name: "烧了",
-                }
+                // {
+                // desc_id: 1,
+                // name: "种牙2",
+                // },
+                // {
+                // desc_id: 2,
+                // name: "拔牙",
+                // },
+                // {
+                // desc_id: 3,
+                // name: "烧了",
+                // }
             ],
-            relation: [],
+            // relation: [],
             doctor_info: [
-                {
-                    doctor_id: 4,
-                    name: "医生c",
-                },
-                {
-                    doctor_id: 5,
-                    name: "医生D",
-                },
+                // {
+                //     doctor_id: 4,
+                //     name: "医生c",
+                // },
+                // {
+                //     doctor_id: 5,
+                //     name: "医生D",
+                // },
             ],
         }
     },
     mounted() {
-        // this.getOptions()
+        this.getOptions()
     },
     methods:{
+        confirm(val) {
+            console.log(val)
+
+        },
         goBack() {
             this.$router.go(-1)
         },
         getOptions () {
             const url = URLS.getURL('bookOp');
             const data = {}
-            $.get(url, data, res => {
-                console.log(res)
+            $.get(url, data, resStr => {
+                const res = JSON.parse(resStr)
                 if(!res.status) {
-                    const { patient_age, illness_desc, relation, doctor_info } = res.data || {}
-                    this.patient_age = patient_age
+                    const { illness_desc, doctor_info, contactor_info : { list } } = res.data || {}
+                    // this.patient_age = patient_age
                     this.illness_desc = illness_desc
-                    this.relation = relation
+                    this.list = list
+                    // this.relation = relation
                     this.doctor_info = doctor_info
                 } else {
                     Toast({
@@ -188,51 +202,57 @@ export default {
                 }
             })
         },
-        getName () {
-            const url = URLS.getURL('list');
-            const data = {}
-            $.get(url, data, res => {
-                console.log('getOptions:',res)
-                if(!res.status) {
-                    this.list = res.data.list
-                } else {
-                    Toast({
-                        message: res.message,
-                        position: 'bottom',
-                        duration: 3000
-                    });
-                }
-            })
+        // 日期
+        dateOpen(){
+            console.log('AAA')
+            this.$refs.picker.open()
         },
         // 点击提交
         clickOK () {
             const that = this
             const url = URLS.getURL('book');
-            const data = {
-                book_name: this.book_name,
-                dentist_id: this.dentist_id,
-                relation_id: this.relation_id,
-                age_id: this.age_id,
-                time_interval: this.time_interval,
-                book_time: this.book_time,
-                desc_id: this.desc_id,
-            }
-            $.post(url, data, res => {
-                if(!res.status) {
-                    that.goBack()
-                    Toast({
-                        message: "预约成功",
-                        position: 'bottom',
-                        duration: 3000
-                    });
-                } else {
-                    Toast({
-                        message: res.message,
-                        position: 'bottom',
-                        duration: 3000
-                    });
+            const {
+                book_name,
+                dentist_id,
+                book_time,
+                desc_id
+            } = this
+
+            const token = this.userInfo.token
+            if (token) {
+                const data = {
+                    book_name,
+                    dentist_id,
+                    // book_time,
+                    desc_id,
+                    token,
                 }
-            })
+                data.book_time = this.book_time_str
+                $.post(url, data, resStr => {
+                    const res = JSON.parse(resStr)
+                    if(!res.status) {
+                        that.goBack()
+                        Toast({
+                            message: "预约成功",
+                            position: 'bottom',
+                            duration: 3000
+                        });
+                    } else {
+                        Toast({
+                            message: res.message,
+                            position: 'bottom',
+                            duration: 3000
+                        });
+                    }
+                })
+            } else {
+                Toast({
+                    message: "token null",
+                    position: 'bottom',
+                    duration: 3000
+                });
+            }
+            
         },
     }
 

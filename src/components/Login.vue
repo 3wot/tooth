@@ -36,7 +36,7 @@ export default {
 		return {
 			phone: '',
 			password: '',
-	  		hasSend: false,//标志是否请求过短信验证码
+	  		hasSend: true,//标志是否请求过短信验证码
 	  		passwordText: '发送验证码',
 	  		passwordTemp: false
 		}
