@@ -45,6 +45,7 @@
         </router-link>
       </div>  
     </div>
+    
 
 <!-- 	<div class="m-sm radius">
 		<div class="panel">
